@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Views</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <script src="https://kit.fontawesome.com/39639630a0.js" crossorigin="anonymous"></script>    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+<body>
+  <% if flash[:notice] %>
+    <div class="notification is-info">
+      <p class="notice"><%= notice %></p>
+    </div>
+<% end %>
+
+<% if flash[:alert] %>
+  <div class="notification is-danger">
+   <p class="alert"><%= alert %></p>
+    </div>
+     <% end %>
+      <nav class="navbar is-warning">
+       <div class="navbar-brand">
+         <%= link_to root_path, class:"navbar-item" do %>
+          <h1 class="title is-4" style="font-family: cursive;">viws</h1>
+           <% end %>
+            <div class="navbar-burger burger" data-target="navbarExampleTransparentExample">
+              <span></span>
+               <span></span>
+                <span></span>
+                 </div>
+                 </div>
+                <% if user_signed_in? %>
+               <div id="navbarExampleTransparentExample"class="navbar-menu">
+               <div class="navbar-item"></div>
+               <%=link_to "VIEWS LIST", views_path, class:"navbar-items button is-warning is-light" %>
+               </div>
+               <div class="navbar-item">
+               <%=link_to "NEW",new_view_path, class: "navbar-item button is-warning is-light" %>
+               </div>
+             <div class="navbar-end">
+             <div class="navbar-item">
+            <div class="field is-grouped">
+            <p class="control">
+           <%= link_to "VIEWERS LIST",users_path,class:"button is-warning is-light"%>
+          </p>
+          <p class="control">
+         <%= link_to :"MY PAGE", user_path(current_user) , class:"button is-warning is-light"%>
+        </p>
+       <p class="control">
+      <%= link_to "LOGOUT",destroy_user_session_path,method: :delete,class:"button is-warning is-light"%>
+     </p>
+    </div>
+   </div>
+  </div>
+ </div>
+<% else %>
+ <div id="navbarExampleTransparentExample"class="navbar-menu">
+  <div class="navbar-end">
+   <div class="navbar-item">
+   <div class="navbar-item"></div>
+     <%=link_to "VIEWS LIST", views_path, class:"navbar-items button is-warning is-light" %>
+      </div>
+       <div class="navbar-item">
+        <%=link_to"VIEWERS LIST" ,users_path, class:"button is-warning is-light"%>
+         </div>
+          <div class="navbar-end">
+           <p class="navbar-item">
+           <div class="field is-grouped">
+           <p class="control">
+                <%=link_to"LOGIN" ,new_user_session_path, class:"button is-warning is-light"%>
+                </p> 
+                 <p class="control">
+                  <%= link_to "SIGNUP", new_user_registration_path, class: "button is-warning is-light" %>
+                 </p>
+                </div>
+              </div>
+              </div>
+            </div>
+           <% end %>
+          </nav>
+         <%= yield %>
+        </body>
+      </html>
